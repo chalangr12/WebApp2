@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="en" ng-app="ui.bootstrap.demo">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Petabyte Recyclers</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="starter-template.css" rel="stylesheet">
+    <script src="bower_components/angularjs/angular.js"></script>
+    
+    <script src="js/controller.js"></script>
+    
+    <script src="js/jquery.js"></script>
+
+    <script src="js/bootstrap.js"></script>
+    <script src="js/ui-bootstrap-tpls-0.13.0.js"></script>
+    <script src="js/states.js"></script>
+    <script src="js/sendemail.js"></script>
+    <script src="js/bootbox.min.js"></script>
+    <script src="js/example.js"></script>
+    </head>
+
+    <body >
+
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Tutorials</a>
+          </div>
+          <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="services.html">Services</a></li>
+              <li><a href="clients.html">Clients</a></li>
+              <li class="active"><a href="scheduleApickUp.html">Schedule Pick Up</a></li>
+              <li><a href="contactUs.html">Contact Us</a></li>
+              <li><a href="aboutUs.html">About</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </nav>
+      <div class="container">
+          <div class="starter-template">
+          <h1>Schedule A Pick-Up</h1>
+            <form action="mailto:chalangr12@gmail.com" method="POST" enctype="text/plain"style="width:450px;display: inline-block;text-align: center;" name='myform' ng-controller="DatepickerDemoCtrl"  ng-submit="submit()">
+              <div class="form-group" ng-form='step1form'>
+                <label for="inputFirstName" style="float:left">First Name:</label>
+                <input type="text" class="form-control" style="float:left" id="inputFirstName" placeholder="First Name" name="First Name" ng-model="firstName" required>
+              </div>
+              <div class="form-group" ng-form='step1form'>
+                <label for="inputlastName" style="float:left">Last Name:</label>
+                <input type="text" style="float:left" class="form-control" id="inputlastName" placeholder="Last Name" name="Last Name" ng-model="lastName" required>
+              </div>
+               <div class="form-group" ng-form='step1form'>
+                <label for="inputEmailAddress" style="float:left">Email Address:</label>
+                <input type="email" style="float:left" class="form-control" id="inputEmailAddress" placeholder="Email Address" name="Email Address" ng-model="emailAddress" required>
+              </div>  
+               <div class="form-group" ng-form='step1form'>
+                <label for="inputAddress" style="float:left">Address:</label>
+                <input type="text" style="float:left" class="form-control" id="inputAddress" placeholder="Address" name="Address" ng-model="address" required>
+              </div>  
+               <div class="form-group" ng-form='step1form'>
+                <label for="inputSuiteApt" style="float:left">Suite/Apt:</label>
+                <input type="text" class="form-control" id="inputSuiteApt" placeholder="Suite/Apt" name="Suite/Apt" ng-model="suiteApt">
+              </div>  
+              <div class="form-group" style="float:left" ng-form='step1form'>
+                <label for="inputCity">City:</label>
+                <input type="text" class="form-control" id="inputCity" placeholder="Cfity" name="City" ng-model="city" required>
+              </div>             
+              <div class="form-group" style="float:left" ng-form='step1form'>
+                <label for="inputState">State:</label>
+                    <select class="form-control" style="width:80px" name="state" ng-model="state" required>
+                      <option ng-repeat="stuff in items" >{{stuff.abbreviation}}</option>
+                    </select>
+              </div>
+              <div class="form-group" name="string" ng-form='step1form' >
+                <label for="inputZip">Zip Code:</label>
+                <input type="text" class="form-control" style="width:174px" id="inputZip" placeholder="Zip Code" name="Zip Code" ng-model="zipCode" required>
+              </div> 
+              <div class="form-group" name="string" ng-form='step1form' ng-controller="DatepickerDemoCtrl">
+                <center> <datepicker type="date" ng-model="pickUpDate" min-date="minDate" show-weeks="true" class="well well-sm" custom-class="getDayClass(date, mode)"  name="date" required></datepicker></center> 
+                  <div ng-controller="DatepickerDemoCtrl">
+                  <center><timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian" required></timepicker></center>
+                  <pre>Selected Pick-up date is: <em>{{pickUpDate | date:'fullDate' }} At {{time | date:'shortTime'}}</em></pre>
+                </div>              
+              </div>
+              <!-- <input  class="btn btn-default" ng-disabled="!myform.$valid" value="Submit" ng-click="submitPickUp(firstName,lastName,emailAddress,address,suiteApt,city,state,zipCode,'schedulePickUp')"/> -->
+              <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" ng-click="submitPickUp(firstName,lastName,emailAddress,address,suiteApt,city,state,zipCode,'schedulePickUp')">
+              Submit
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-disabled="!myform.$valid" ><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel" >Confirm</h4>
+                  </div>
+                  <div class="modal-body"><center>
+                      <table>
+                      <tr><td>First Name:     </td>    <td>   {{firstName}}<br></td></tr>
+                      <tr><td>Last Name:      </td>    <td>   {{lastName}}<br></td></tr>
+                      <tr><td>Email Address:  </td>    <td>   {{emailAddress}}<br></td></tr>
+                      <tr><td>Address:        </td>    <td>   {{address}}<br></td></tr>
+                      <tr><td>Suite/Apt:      </td>    <td>   {{suiteApt}}<br></td></tr>
+                      <tr><td>City:           </td>    <td>   {{city}}<br></td></tr>
+                      <tr><td>State:          </td>    <td>   {{state}}<br></td></tr>
+                      <tr><td>Zip Code:       </td>    <td>   {{zipCode}}<br></td></tr>
+                      <tr><td>Pick-Up Date:   </td>    <td>   {{settingPickUpdate}}<br></td></tr>
+                      <tr><td>Pick-Up Time:   </td>    <td>   {{timeToPickup}}<br></td></tr>
+                      </table>
+                      </center>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="button" class="btn btn-primary" ng-click="confirm()" id="confirm" value ='Confirm'>
+                    <div class="alert alert-success" role="alert" id="success" style="visibility: hidden"><center>Reqeust Successfully Sent</center></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </form>
+
+      </div><!-- /.container -->
+      <div class="footer" style=" position: fixed;bottom: 0;width: 100%;">
+      I am here
+      </div>
+      <script>
+
+          
+      </script>
+
+      <!-- Bootstrap core JavaScript
+      ================================================== -->
+      <!-- Placed at the end of the document so the pages load faster -->
+     
+    </body>
+</html>
